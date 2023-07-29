@@ -6,6 +6,41 @@
     <title>Ajax 1- Text File</title>
 </head>
 <body>
-    
+  
+    <button id="button">Get Text File</button>
+    <p id="text"></p>
+
+    <script>
+        //Event Listener
+        const btn = document.querySelector("#button")
+
+        btn.addEventListener('click', ()=>{
+            //create XHR object
+
+            let xhr = new XMLHttpRequest();
+
+            //oprn - type , url/file name , asyc or not
+           xhr.open('GET', 'sample.txt', true);
+
+           //optional used for loaders
+           xhr.onprogress = (event)=>{
+             console.log(xhr.readyState)
+           }
+
+
+           xhr.onload = function(){
+            if(this.status === 200){
+                //console.log(this.responseText)
+                document.querySelector("#text").innerHTML = this.responseText
+            }
+            
+           }
+           xhr.onerror=(InputEvent)=>{
+            console.log("Request error")
+           }
+           //sends request
+           xhr.send();
+        })
+    </script>
 </body>
 </html>
