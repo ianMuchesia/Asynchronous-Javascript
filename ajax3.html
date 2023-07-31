@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajax 3- External API</title>
+</head>
+<body>
+    <button id="button">
+        Load Github users
+    </button>
+
+    <br>
+    <br>
+    <div id="users"></div>
+
+    <script>
+        document.querySelector("#button").addEventListener('click', ()=>{
+          //Load github users 
+         
+           const xhr = new XMLHttpRequest();
+           xhr.open('GET', 'https://api.github.com/users', true)
+          
+           xhr.onload = function(){
+            if(this.status ===200){
+                const users = JSON.parse(this.responseText)
+               document.querySelector("#users").innerHTML = users.map(user=>(
+                `<div class="users">
+                    <img src="${user.avatar_url}" alt="" width="70" height="70">
+                    <ul>
+                        <li>ID :${user.id}</li>
+                        <li><strong>${user.login}</strong></li>
+                        
+                    </ul>
+                </div>
+                `
+               )).join("")
+            }else{
+                console.log("hey")
+            }
+           
+           }
+           xhr.send();
+        })
+    </script>
+</body>
+</html>
