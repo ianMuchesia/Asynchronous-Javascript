@@ -32,6 +32,8 @@
             if(this.status === 200){
                 //console.log(this.responseText)
                 document.querySelector("#text").innerHTML = this.responseText
+            }else if(this.status === 404){
+                document.querySelector("#text").innerHTML = "Request not found"
             }
             
            }
